@@ -2,6 +2,8 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -10,7 +12,7 @@ import java.util.logging.Logger;
 */
 public class Agenda {
 
-    Contacto[] lista_contactos = new Contacto[99];
+    List<Contacto> lista_contactos = new ArrayList();
     private int contador_contactos = 0; // Contador de objetos creados. Variable muy importante.
 
     public void Consultar(String nombre, int telefono) {
@@ -108,71 +110,9 @@ public class Agenda {
 
     }
 
-    public void Eliminar() {
-        try {
-            boolean encontrado = false;
-            BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
-            System.out.println("Nombre de contacto a eliminar:");
-            String eliminar = teclado.readLine().toUpperCase();
-            if (contador_contactos == 0) {
-                System.out.println("No hay contactos");
-            } else {
-                for (int i = 0; i < contador_contactos; i++) {
-
-                    if (eliminar.equals(this.lista_contactos[i].getNombre())) {
-                        System.out.println(i + 1 + ". " + this.lista_contactos[i].getNombre() + "-" + "Tf:" + this.lista_contactos[i].getTelefono());
-                        encontrado = true;
-                    }
-                }
-                if (encontrado) {
-                    System.out.println("¿Qué contacto quieres eliminar, introduce el número asociado?");
-                    int eliminar_numero = Integer.parseInt(teclado.readLine());
-                    eliminar_numero--;
-                    System.out.println("¿Estas seguro (S/N)?");
-                    String respuesta;
-                    respuesta = teclado.readLine();
-                    respuesta = respuesta.toUpperCase();
-                    if (respuesta.equals("S")) {
-                        Contacto[] temporal = new Contacto[99];
-                        int ii = 0;
-                        boolean encontrado2 = false;
-                        for (int i = 0; i < this.contador_contactos; i++) {
-
-                            if (i != eliminar_numero) {
-                                // Creo el objeto temporal para el borrado
-                                if (!encontrado2) {
-                                    temporal[ii] = this.lista_contactos[ii];
-                                    ii++;
-                                } else {
-                                    if (ii < this.contador_contactos) {
-                                        temporal[ii] = this.lista_contactos[ii + 1];
-                                        ii++;
-                                    }
-                                }
-
-                            } else {
-                                temporal[ii] = this.lista_contactos[ii + 1];
-                                ii++;
-                                encontrado2 = true;
-
-                            }
-                        }
-                        this.contador_contactos--;
-                        System.out.println("Contacto eliminado correctamente");
-                        for (int j = 0; j < this.contador_contactos; j++) {
-                            this.lista_contactos[j] = temporal[j];
-
-                        }
-
-                    }
-
-                } else {
-                    System.out.println("Lo siento, No se ha encontrado el nombre");
-                }
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(Agenda.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void EliminarNombre(String nombre) {
+    	
+    	
     }
 
     public void Modificar() {
