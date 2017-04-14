@@ -95,19 +95,30 @@ public class Agenda {
             this.lista_contactos.add(new Contacto(nombre,telefono));
     }
 
-    public void Buscar(String nombre) {
-        boolean encontrado = false;
-
-        for (int i = 0; i < contador_contactos; i++) {
-            if (nombre.equals(this.lista_contactos.get(i).getNombre())) {
-                System.out.println(this.lista_contactos.get(i).getNombre() + "-" + "Tf:" + this.lista_contactos.get(i).getTelefono());
-                encontrado = true;
+    public List<Contacto> Buscar(String nombre) {
+        List<Contacto> filteredContactos = new ArrayList<Contacto>();
+        for (Contacto contacto : lista_contactos) {
+            if (contacto.getNombre().toLowerCase().contains(nombre.toLowerCase())) {
+                filteredContactos.add(contacto);
             }
         }
-        if (!encontrado) {
-            System.out.println("Contacto inexistente");
-        }
+        return filteredContactos;
     }
+
+    public List<Contacto> Buscar(int tlf) {
+        List<Contacto> filteredContactos = new ArrayList<Contacto>();
+        for (Contacto contacto : lista_contactos) {
+            boolean añadido = false;
+            for (int i = 0; i < contacto.getTelefonos().size() && !añadido; i++) {
+                if (Integer.toString(contacto.getTelefonos().get(i)).contains(Integer.toString(tlf)) {
+                    filteredContactos.add(contacto);
+                    añadido = true;
+                }
+            }
+        }
+        return filteredContactos;
+    }
+
 
     public void Ordenar() {
         Collections.sort(lista_contactos);
