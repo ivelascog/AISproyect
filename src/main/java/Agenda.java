@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 * @author Oscar de la Cuesta Campillo. www.palentino.es
 */
 public class Agenda {
-
+    private static final String DEFAULT_PATH = "Contactos.txt";
     List<Contacto> lista_contactos = new ArrayList<Contacto>();
 
     public List<Contacto> fromCSV(String path) {
@@ -80,6 +80,17 @@ public class Agenda {
 
     public void Anadir(String nombre, int telefono) {
             this.lista_contactos.add(new Contacto(nombre,telefono));
+        Ordenar();
+        toCSV(DEFAULT_PATH);
+    }
+
+    public void impotar(String path) {
+        lista_contactos.addAll(fromCSV(path));
+        toCSV(DEFAULT_PATH);
+    }
+
+    public void exportar(String path) {
+        toCSV(path);
     }
 
     public boolean checkNombre(String nombre) {
@@ -102,7 +113,7 @@ public class Agenda {
         for (Contacto contacto : lista_contactos) {
             boolean añadido = false;
             for (int i = 0; i < contacto.getTelefonos().size() && !añadido; i++) {
-                if (Integer.toString(contacto.getTelefonos().get(i)).contains(Integer.toString(tlf)) {
+                if (Integer.toString(contacto.getTelefonos().get(i)).contains(Integer.toString(tlf))) {
                     filteredContactos.add(contacto);
                     añadido = true;
                 }
@@ -121,11 +132,12 @@ public class Agenda {
         Contacto contactoAux = lista_contactos.get(index);
         contacto.setNombre(nombre);
         contacto.setTelefonos(telefonos);
+        toCSV(DEFAULT_PATH);
     }
 
     public void Eliminar(Contacto contacto) {
         lista_contactos.remove(contacto);
-
+        toCSV(DEFAULT_PATH);
     }
 }
 
