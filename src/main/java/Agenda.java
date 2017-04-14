@@ -19,6 +19,10 @@ public class Agenda {
         this.lista_contactos = lista_contactos;
     }
 
+    public Contacto getContacto(int i) {
+        return lista_contactos.get(i);
+    }
+
     public List<Contacto> fromCSV(String path) {
         File file = new File(path);
         FileReader fr = null;
@@ -65,10 +69,13 @@ public class Agenda {
             bw.append("Nombre,Tlfnos\n");
             for (Contacto contacto:this.lista_contactos){
                 bw.append(contacto.getNombre()).append(",");
-                for (int i = 0; i < contacto.getTelefonos().size() - 1; i++) {
-                    bw.append(String.valueOf(contacto.getTelefonos().get(i))).append(",");
+                for (int i = 0; i < contacto.getTelefonos().size(); i++) {
+                    if (i == (contacto.getTelefonos().size() - 1)) {
+                        bw.append(String.valueOf(contacto.getTelefonos().get(i))).append("\n");
+                    } else {
+                        bw.append(String.valueOf(contacto.getTelefonos().get(i))).append(",");
+                    }
                 }
-                bw.append(String.valueOf(contacto.getTelefonos().get(contacto.getTelefonos().size() - 1))).append("\n");
             }
             bw.flush();
         } catch (IOException e) {
