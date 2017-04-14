@@ -1,10 +1,8 @@
-
 import java.io.*;
-import java.nio.Buffer;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,6 +22,42 @@ public class Agenda {
             }
         }
 
+    }
+
+    public List<Contacto> fromCSV(String path) {
+        File file = new File(path);
+        FileReader fr = null;
+        BufferedReader br = null;
+        List<Contacto> contactos = new ArrayList<Contacto>();
+        try {
+            fr = new FileReader(file);
+            br = new BufferedReader(fr);
+            br.readLine();
+            String line = null;
+            while ((line = br.readLine()) != null) {
+                StringTokenizer st = new StringTokenizer(line, ",");
+                Contacto contacto = new Contacto(st.nextToken());
+                while (st.hasMoreTokens()) {
+                    contacto.addTelefono(Integer.getInteger(st.nextToken()));
+                }
+                contactos.add(contacto);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (br != null) {
+                    br.close();
+                }
+                if (fr != null) {
+                    fr.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return contactos;
     }
 
     public void toCSV(String path){

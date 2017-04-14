@@ -14,6 +14,10 @@ public class Contacto implements Comparable<Contacto>{
 
     }
 
+    public Contacto(String nombre) {
+        this.nombre = nombre;
+    }
+
     public Contacto()
     {
         this.nombre=null;
