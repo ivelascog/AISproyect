@@ -8,8 +8,16 @@ import java.util.StringTokenizer;
 * @author Oscar de la Cuesta Campillo. www.palentino.es
 */
 public class Agenda {
-    private static final String DEFAULT_PATH = "Contactos.txt";
+    public static final String DEFAULT_PATH = "Contactos.txt";
     List<Contacto> lista_contactos = new ArrayList<Contacto>();
+
+    public List<Contacto> getLista_contactos() {
+        return lista_contactos;
+    }
+
+    public void setLista_contactos(List<Contacto> lista_contactos) {
+        this.lista_contactos = lista_contactos;
+    }
 
     public List<Contacto> fromCSV(String path) {
         File file = new File(path);
@@ -25,7 +33,7 @@ public class Agenda {
                 StringTokenizer st = new StringTokenizer(line, ",");
                 Contacto contacto = new Contacto(st.nextToken());
                 while (st.hasMoreTokens()) {
-                    contacto.addTelefono(Integer.getInteger(st.nextToken()));
+                    contacto.addTelefono(Integer.parseInt(st.nextToken()));
                 }
                 contactos.add(contacto);
             }
@@ -56,10 +64,11 @@ public class Agenda {
             bw = new BufferedWriter(fr);
             bw.append("Nombre,Tlfnos\n");
             for (Contacto contacto:this.lista_contactos){
-                bw.append(contacto.getNombre());
-                for (Integer telefono:contacto.getTelefonos()){
-                    bw.append(",").append(String.valueOf(telefono));
+                bw.append(contacto.getNombre()).append(",");
+                for (int i = 0; i < contacto.getTelefonos().size() - 1; i++) {
+                    bw.append(String.valueOf(contacto.getTelefonos().get(i))).append(",");
                 }
+                bw.append(String.valueOf(contacto.getTelefonos().get(contacto.getTelefonos().size() - 1))).append("\n");
             }
             bw.flush();
         } catch (IOException e) {

@@ -6,7 +6,7 @@ import java.util.List;
  */
 public class Contacto implements Comparable<Contacto> {
     private String nombre;
-    private List<Integer> telefonos;
+    private List<Integer> telefonos = new ArrayList<Integer>();
 
     public Contacto(String nombre, List<Integer> telefonos) {
         this.nombre = nombre;
