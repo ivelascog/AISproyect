@@ -3,6 +3,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,38 +14,36 @@ import java.util.logging.Logger;
 */
 public class Agenda {
 
-    List<Contacto> lista_contactos = new ArrayList();
+    List<Contacto> lista_contactos = new ArrayList<Contacto>();
     private int contador_contactos = 0; // Contador de objetos creados. Variable muy importante.
 
     public void Consultar(String nombre, int telefono) {
         for (int i = 0; i < this.contador_contactos; i++) {
 
-            if (nombre.equals(this.lista_contactos[i].getNombre())) {
+            if (nombre.equals(this.lista_contactos.get(i).getNombre())) {
                 System.out.println("Ya existe un contacto con ese nombre");
             }
         }
 
     }
 
-    public void Anadir(String nombre, int telefono) {
-        if (contador_contactos < 99) {
-            this.lista_contactos[contador_contactos] = new Contacto();
-            this.lista_contactos[contador_contactos].set_nombre(nombre);
-            this.lista_contactos[contador_contactos].set_telefono(telefono);
-            this.contador_contactos++;
-            Ordenar();
-        } else {
-            System.out.println("La agenda está llena");
-        }
+    public void toCSV(String path){
 
+    }
+
+    public void Anadir(String nombre, int telefono) {
+            Contacto contacto = new Contacto();
+            contacto.set_nombre(nombre);
+            contacto.set_telefono(telefono);
+            this.lista_contactos.add(contacto);
     }
 
     public void Buscar(String nombre) {
         boolean encontrado = false;
 
         for (int i = 0; i < contador_contactos; i++) {
-            if (nombre.equals(this.lista_contactos[i].getNombre())) {
-                System.out.println(this.lista_contactos[i].getNombre() + "-" + "Tf:" + this.lista_contactos[i].getTelefono());
+            if (nombre.equals(this.lista_contactos.get(i).getNombre())) {
+                System.out.println(this.lista_contactos.get(i).getNombre() + "-" + "Tf:" + this.lista_contactos.get(i).getTelefono());
                 encontrado = true;
             }
         }
@@ -53,24 +53,7 @@ public class Agenda {
     }
 
     public void Ordenar() {
-        //Este método ordenará el array de contacos por el nombre mediante el Método Burbuja
-        int N = this.contador_contactos;
-        String nombre1;
-        String nombre2;
-        //Optimizo para cuando tenga más de dos elementos al menos.
-        if (contador_contactos >= 2) {
-            for (int i = 1; i <= N - 1; i++) {
-                for (int j = 1; j <= N - i; j++) {
-                    nombre1 = this.lista_contactos[j - 1].getNombre();
-                    nombre2 = this.lista_contactos[j].getNombre();
-                    if (nombre1.charAt(0) > nombre2.charAt(0)) {
-                        Contacto tmp = this.lista_contactos[j - 1];
-                        this.lista_contactos[j - 1] = this.lista_contactos[j];
-                        this.lista_contactos[j] = tmp;
-                    }
-                }
-            }
-        }
+        Collections.sort(lista_contactos);
     }
 
     public void Mostrar() {
@@ -79,7 +62,7 @@ public class Agenda {
         } else {
             for (int t = 0; t < this.contador_contactos; t++) {
                 // Es necesario por precaución usar el this para el metodo, puesto que si se ejecuta muchas veces la referencias a memoria pueden fallar.
-                System.out.println(this.lista_contactos[t].getNombre() + "-" + "Tf:" + Integer.toString(this.lista_contactos[t].getTelefono()));
+                System.out.println(this.lista_contactos.get(t).getNombre() + "-" + "Tf:" + Integer.toString(this.lista_contactos.get(t).getTelefono()));
             }
         }
     }
@@ -96,8 +79,8 @@ public class Agenda {
 
                 //Lo hago por mera formalidad porque java se encarga de liberar los objetos no referenciados creados. El garbage collector
                 for (int i = 0; i < this.contador_contactos; i++) {
-                    this.lista_contactos[i].set_nombre("");
-                    this.lista_contactos[i].set_telefono(0);
+                    this.lista_contactos.get(i).set_nombre("");
+                    this.lista_contactos.get(i).set_telefono(0);
                 }
                 contador_contactos = 0;
                 System.out.println("Agenda vaciada correctamente");
@@ -111,8 +94,8 @@ public class Agenda {
     }
 
     public void EliminarNombre(String nombre) {
-    	
-    	
+
+
     }
 
     public void Modificar() {
@@ -126,8 +109,8 @@ public class Agenda {
             } else {
                 for (int i = 0; i < this.contador_contactos; i++) {
 
-                    if (eliminar.equals(this.lista_contactos[i].getNombre())) {
-                        System.out.println(i + 1 + ". " + this.lista_contactos[i].getNombre() + "-" + "Tf:" + this.lista_contactos[i].getTelefono());
+                    if (eliminar.equals(this.lista_contactos.get(i).getNombre())) {
+                        System.out.println(i + 1 + ". " + this.lista_contactos.get(i).getNombre() + "-" + "Tf:" + this.lista_contactos.get(i).getTelefono());
                         encontrado = true;
                     }
                 }
@@ -140,8 +123,8 @@ public class Agenda {
                     System.out.println("Introduce teléfono, formato numerico:");
                     int telefono_nuevo = Integer.parseInt(teclado.readLine());
 
-                    this.lista_contactos[modificar_numero - 1].set_nombre(nombre_nuevo);
-                    this.lista_contactos[modificar_numero - 1].set_telefono(telefono_nuevo);
+                    this.lista_contactos.get(modificar_numero - 1).set_nombre(nombre_nuevo);
+                    this.lista_contactos.get(modificar_numero - 1).set_telefono(telefono_nuevo);
                     Ordenar();
                 } else {
                     System.out.println("No hay contactos con ese nombre");
@@ -153,5 +136,8 @@ public class Agenda {
         }
     }
 
+    public void Eliminar() {
+
+    }
 }
 

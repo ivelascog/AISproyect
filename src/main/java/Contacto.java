@@ -1,7 +1,7 @@
 /**
  * Created by ivan_ on 26/01/2017.
  */
-public class Contacto {
+public class Contacto implements Comparable<Contacto>{
     private String nombre;
     private int telefono;
 
@@ -27,6 +27,10 @@ public class Contacto {
 
     public int getTelefono() {
         return telefono;
+    }
+
+    public int compareTo(Contacto o) {
+        return 0;
     }
 }
 
