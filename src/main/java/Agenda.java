@@ -1,7 +1,6 @@
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -28,14 +27,38 @@ public class Agenda {
     }
 
     public void toCSV(String path){
-
+        File file = new File(path);
+        FileWriter fr = null;
+        BufferedWriter bw = null;
+        try {
+            fr = new FileWriter(file);
+            bw = new BufferedWriter(fr);
+            bw.append("Nombre,Tlfnos\n");
+            for (Contacto contacto:this.lista_contactos){
+                bw.append(contacto.getNombre());
+                for (Integer telefono:contacto.getTelefonos()){
+                    bw.append(",").append(String.valueOf(telefono));
+                }
+            }
+            bw.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (bw != null) {
+                    bw.close();
+                }
+                if (fr != null) {
+                    fr.close();
+                }
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 
     public void Anadir(String nombre, int telefono) {
-            Contacto contacto = new Contacto();
-            contacto.set_nombre(nombre);
-            contacto.set_telefono(telefono);
-            this.lista_contactos.add(contacto);
+            this.lista_contactos.add(new Contacto(nombre,telefono));
     }
 
     public void Buscar(String nombre) {
@@ -79,7 +102,7 @@ public class Agenda {
 
                 //Lo hago por mera formalidad porque java se encarga de liberar los objetos no referenciados creados. El garbage collector
                 for (int i = 0; i < this.contador_contactos; i++) {
-                    this.lista_contactos.get(i).set_nombre("");
+                    this.lista_contactos.get(i).setNombre("");
                     this.lista_contactos.get(i).set_telefono(0);
                 }
                 contador_contactos = 0;
@@ -123,7 +146,7 @@ public class Agenda {
                     System.out.println("Introduce teléfono, formato numerico:");
                     int telefono_nuevo = Integer.parseInt(teclado.readLine());
 
-                    this.lista_contactos.get(modificar_numero - 1).set_nombre(nombre_nuevo);
+                    this.lista_contactos.get(modificar_numero - 1).setNombre(nombre_nuevo);
                     this.lista_contactos.get(modificar_numero - 1).set_telefono(telefono_nuevo);
                     Ordenar();
                 } else {

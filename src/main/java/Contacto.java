@@ -1,32 +1,47 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by ivan_ on 26/01/2017.
  */
 public class Contacto implements Comparable<Contacto>{
     private String nombre;
-    private int telefono;
+    private List<Integer> telefonos;
+
+    public Contacto(String nombre, List<Integer> telefonos) {
+        this.nombre = nombre;
+        this.telefonos = telefonos;
+
+    }
 
     public Contacto()
     {
         this.nombre=null;
-        this.telefono=0;
+        this.telefonos= new ArrayList<Integer>();
     }
     public Contacto(String nombre, int telefono) {
         this.nombre = nombre;
-        this.telefono = telefono;
-    }
-    public void set_nombre(String nomb){
-        this.nombre=nomb.toUpperCase();
-    }
-    public void set_telefono(int telf){
-        this.telefono=telf;
+        this.telefonos.add(telefono);
     }
 
     public String getNombre() {
-        return this.nombre;
+        return nombre;
     }
 
-    public int getTelefono() {
-        return telefono;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public List<Integer> getTelefonos() {
+        return telefonos;
+    }
+
+    public void setTelefonos(List<Integer> telefonos) {
+        this.telefonos = telefonos;
+    }
+
+    public void addTelefono(int telf){
+        telefonos.add(telf);
     }
 
     public int compareTo(Contacto o) {
