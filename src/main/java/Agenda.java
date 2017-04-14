@@ -95,6 +95,11 @@ public class Agenda {
             this.lista_contactos.add(new Contacto(nombre,telefono));
     }
 
+    public boolean checkNombre(String nombre) {
+        Contacto contactoAux = new Contacto(nombre);
+        return lista_contactos.contains(contactoAux);
+    }
+
     public List<Contacto> Buscar(String nombre) {
         List<Contacto> filteredContactos = new ArrayList<Contacto>();
         for (Contacto contacto : lista_contactos) {

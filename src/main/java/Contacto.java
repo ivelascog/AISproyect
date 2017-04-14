@@ -51,5 +51,16 @@ public class Contacto implements Comparable<Contacto> {
     public int compareTo(Contacto contacto) {
         return this.nombre.compareTo(contacto.getNombre());
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Contacto contacto = (Contacto) o;
+
+        return nombre.equals(contacto.nombre);
+    }
+
 }
 
