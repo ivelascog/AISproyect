@@ -4,7 +4,7 @@ import java.util.List;
 /**
  * Created by ivan_ on 26/01/2017.
  */
-public class Contacto implements Comparable<Contacto>{
+public class Contacto implements Comparable<Contacto> {
     private String nombre;
     private List<Integer> telefonos;
 
@@ -18,11 +18,11 @@ public class Contacto implements Comparable<Contacto>{
         this.nombre = nombre;
     }
 
-    public Contacto()
-    {
-        this.nombre=null;
-        this.telefonos= new ArrayList<Integer>();
+    public Contacto() {
+        this.nombre = null;
+        this.telefonos = new ArrayList<Integer>();
     }
+
     public Contacto(String nombre, int telefono) {
         this.nombre = nombre;
         this.telefonos.add(telefono);
@@ -44,12 +44,12 @@ public class Contacto implements Comparable<Contacto>{
         this.telefonos = telefonos;
     }
 
-    public void addTelefono(int telf){
+    public void addTelefono(int telf) {
         telefonos.add(telf);
     }
 
-    public int compareTo(Contacto o) {
-        return 0;
+    public int compareTo(Contacto contacto) {
+        return this.nombre.compareTo(contacto.getNombre());
     }
 }
 
