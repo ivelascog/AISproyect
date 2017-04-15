@@ -1,6 +1,7 @@
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
+import com.google.i18n.phonenumbers.ShortNumberInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
  */
 public class Contacto implements Comparable<Contacto> {
     public static PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
+    public static ShortNumberInfo shortUtil = ShortNumberInfo.getInstance();
     private String nombre;
     private List<Phonenumber.PhoneNumber> telefonos = new ArrayList<Phonenumber.PhoneNumber>();
 
@@ -42,16 +44,17 @@ public class Contacto implements Comparable<Contacto> {
         try {
             phoneNumber = phoneUtil.parse(tlf, "ES");
             if (!phoneUtil.isValidNumber(phoneNumber)) {
-                return null;
-            } else {
-                return phoneNumber;
+                if (!shortUtil.isValidShortNumber(phoneNumber)) {
+                    return null;
+                }
             }
+            return phoneNumber;
         } catch (NumberParseException e) {
             e.printStackTrace();
             return null;
         }
-
     }
+
 
     public String getNombre() {
         return nombre;

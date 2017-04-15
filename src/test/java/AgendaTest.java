@@ -15,7 +15,7 @@ public class AgendaTest {
     @Test
     public void testPersistencia() {
         Agenda agenda = new Agenda();
-        agenda.Anadir("1", Contacto.stringToPhone("645383793"));
+        agenda.Anadir("1", Contacto.stringToPhone("091"));
         agenda.Anadir("2", Contacto.stringToPhone("645389564"));
         agenda.Anadir("3", Contacto.stringToPhone("645289348"));
         List<Contacto> contactos = agenda.fromCSV(Agenda.DEFAULT_PATH);
