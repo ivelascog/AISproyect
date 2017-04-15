@@ -76,10 +76,7 @@ public class Agenda {
             bw = new BufferedWriter(fr);
             bw.append("Nombre,Tlfnos\n");
             for (Contacto contacto:this.lista_contactos){
-                if (contacto.getNombre() != null) {
-                    bw.append(contacto.getNombre());
-                }
-                bw.append(",");
+                bw.append(contacto.getNombre()).append(",");
                 for (int i = 0; i < contacto.getTelefonos().size(); i++) {
                     if (i == (contacto.getTelefonos().size() - 1)) {
                         bw.append(String.valueOf(contacto.getTelefonos().get(i))).append("\n");

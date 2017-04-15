@@ -46,6 +46,11 @@ public class AgendaTest {
     }
 
     @Test
+    public void testPersistenciaSinNumero() {
+        //TODO Cuando este listo la representacion de los numeros de los contactos
+    }
+
+    @Test
     public void testModificar() {
         Agenda agenda = new Agenda();
         agenda.Anadir("1", 1);
