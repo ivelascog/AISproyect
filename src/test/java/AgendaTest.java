@@ -18,7 +18,31 @@ public class AgendaTest {
         agenda.Anadir("2", 2);
         agenda.Anadir("3", 3);
         List<Contacto> contactos = agenda.fromCSV(Agenda.DEFAULT_PATH);
-        Assert.assertTrue(agenda.getLista_contactos().equals(contactos));
+        Assert.assertEquals(contactos.size(), agenda.getLista_contactos().size());
+        compareContactList(agenda, contactos);
+    }
+
+    private void compareContactList(Agenda agenda, List<Contacto> contactos) {
+        for (int i = 0; i < contactos.size(); i++) {
+            Assert.assertEquals(contactos.get(i).getNombre(), agenda.getContacto(i).getNombre());
+            Assert.assertEquals(contactos.get(i).getTelefonos().size(), agenda.getContacto(i).getTelefonos().size());
+            for (int j = 0; j < contactos.get(i).getTelefonos().size(); j++) {
+                Assert.assertEquals(contactos.get(i).getTelefonos().get(j), agenda.getContacto(i).getTelefonos().get(j));
+            }
+        }
+    }
+
+    @Test
+    public void testPersistenciaSinNombre() {
+        Agenda agenda = new Agenda();
+        agenda.Anadir(null, 1);
+        List<Integer> tlfs = new ArrayList<Integer>();
+        tlfs.add(2);
+        tlfs.add(3);
+        agenda.Anadir(null, tlfs);
+        List<Contacto> contactos = agenda.fromCSV(Agenda.DEFAULT_PATH);
+        Assert.assertEquals(contactos.size(), agenda.getLista_contactos().size());
+        compareContactList(agenda, contactos);
     }
 
     @Test

@@ -9,7 +9,9 @@ import java.util.StringTokenizer;
 */
 public class Agenda {
     public static final String DEFAULT_PATH = "Contactos.txt";
-    List<Contacto> lista_contactos = new ArrayList<Contacto>();
+    private List<Contacto> lista_contactos = new ArrayList<Contacto>();
+
+
 
     public List<Contacto> getLista_contactos() {
         return lista_contactos;
@@ -35,7 +37,13 @@ public class Agenda {
             String line = null;
             while ((line = br.readLine()) != null) {
                 StringTokenizer st = new StringTokenizer(line, ",");
-                Contacto contacto = new Contacto(st.nextToken());
+                String nombre = st.nextToken();
+                Contacto contacto;
+                if (nombre.equals("null")) {
+                    contacto = new Contacto();
+                } else {
+                    contacto = new Contacto(nombre);
+                }
                 while (st.hasMoreTokens()) {
                     contacto.addTelefono(Integer.parseInt(st.nextToken()));
                 }
@@ -68,7 +76,10 @@ public class Agenda {
             bw = new BufferedWriter(fr);
             bw.append("Nombre,Tlfnos\n");
             for (Contacto contacto:this.lista_contactos){
-                bw.append(contacto.getNombre()).append(",");
+                if (contacto.getNombre() != null) {
+                    bw.append(contacto.getNombre());
+                }
+                bw.append(",");
                 for (int i = 0; i < contacto.getTelefonos().size(); i++) {
                     if (i == (contacto.getTelefonos().size() - 1)) {
                         bw.append(String.valueOf(contacto.getTelefonos().get(i))).append("\n");
@@ -95,7 +106,13 @@ public class Agenda {
     }
 
     public void Anadir(String nombre, int telefono) {
-            this.lista_contactos.add(new Contacto(nombre,telefono));
+        this.lista_contactos.add(new Contacto(nombre, telefono));
+        Ordenar();
+        toCSV(DEFAULT_PATH);
+    }
+
+    public void Anadir(String nombre, List<Integer> telefono) {
+        this.lista_contactos.add(new Contacto(nombre, telefono));
         Ordenar();
         toCSV(DEFAULT_PATH);
     }

@@ -28,6 +28,10 @@ public class Contacto implements Comparable<Contacto> {
         this.telefonos.add(telefono);
     }
 
+    public Contacto(int tlf) {
+        this.telefonos.add(tlf);
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -49,6 +53,9 @@ public class Contacto implements Comparable<Contacto> {
     }
 
     public int compareTo(Contacto contacto) {
+        if (this.getNombre() == null) {
+            return contacto.getNombre() == null ? 0 : 1;
+        }
         return this.nombre.compareTo(contacto.getNombre());
     }
 
@@ -57,8 +64,11 @@ public class Contacto implements Comparable<Contacto> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Contacto contacto = (Contacto) o;
 
+        Contacto contacto = (Contacto) o;
+        if (this.getNombre() == null) {
+            return contacto.getNombre() == null;
+        }
         return nombre.equals(contacto.nombre);
     }
 
