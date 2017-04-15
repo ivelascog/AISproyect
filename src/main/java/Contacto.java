@@ -9,6 +9,7 @@ import java.util.List;
  * Created by ivan_ on 26/01/2017.
  */
 public class Contacto implements Comparable<Contacto> {
+    public static PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
     private String nombre;
     private List<Phonenumber.PhoneNumber> telefonos = new ArrayList<Phonenumber.PhoneNumber>();
 
@@ -36,16 +37,6 @@ public class Contacto implements Comparable<Contacto> {
         this.telefonos.add(tlf);
     }
 
-    public static boolean checkNumber(String tlf) {
-        PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
-        try {
-            Phonenumber.PhoneNumber phoneNumber = phoneUtil.parse(tlf, "ES");
-            return phoneUtil.isValidNumber(phoneNumber);
-        } catch (NumberParseException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
 
     public String getNombre() {
         return nombre;
@@ -63,8 +54,19 @@ public class Contacto implements Comparable<Contacto> {
         this.telefonos = telefonos;
     }
 
-    public void addTelefono(Phonenumber.PhoneNumber telf) {
-        telefonos.add(telf);
+    public boolean addTelefono(String telf) {
+        try {
+            Phonenumber.PhoneNumber phoneNumber = phoneUtil.parse(telf, "ES");
+            if (!phoneUtil.isValidNumber(phoneNumber)) {
+                return false;
+            } else {
+                telefonos.add(phoneNumber);
+                return true;
+            }
+        } catch (NumberParseException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public int compareTo(Contacto contacto) {

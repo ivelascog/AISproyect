@@ -1,3 +1,4 @@
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
 
 import java.io.*;
@@ -46,7 +47,7 @@ public class Agenda {
                     contacto = new Contacto(nombre);
                 }
                 while (st.hasMoreTokens()) {
-                    contacto.addTelefono(Integer.parseInt(st.nextToken()));
+                    contacto.addTelefono(st.nextToken());
                 }
                 contactos.add(contacto);
             }
@@ -129,7 +130,7 @@ public class Agenda {
         return lista_contactos.contains(contactoAux);
     }
 
-    public List<Contacto> Buscar(String nombre) {
+    public List<Contacto> BuscarNombre(String nombre) {
         List<Contacto> filteredContactos = new ArrayList<Contacto>();
         for (Contacto contacto : lista_contactos) {
             if (contacto.getNombre().toLowerCase().contains(nombre.toLowerCase())) {
@@ -139,12 +140,13 @@ public class Agenda {
         return filteredContactos;
     }
 
-    public List<Contacto> Buscar(int tlf) {
+    public List<Contacto> BuscarTlf(String tlf) {
         List<Contacto> filteredContactos = new ArrayList<Contacto>();
         for (Contacto contacto : lista_contactos) {
             boolean añadido = false;
             for (int i = 0; i < contacto.getTelefonos().size() && !añadido; i++) {
-                if (Integer.toString(contacto.getTelefonos().get(i)).contains(Integer.toString(tlf))) {
+                PhoneNumberUtil.MatchType match = Contacto.phoneUtil.isNumberMatch(contacto.getTelefonos().get(i), tlf);
+                if (match == PhoneNumberUtil.MatchType.NSN_MATCH || match == PhoneNumberUtil.MatchType.SHORT_NSN_MATCH) {
                     filteredContactos.add(contacto);
                     añadido = true;
                 }
