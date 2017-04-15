@@ -15,9 +15,9 @@ public class AgendaTest {
     @Test
     public void testPersistencia() {
         Agenda agenda = new Agenda();
-        agenda.Anadir("1", 1);
-        agenda.Anadir("2", 2);
-        agenda.Anadir("3", 3);
+        agenda.Anadir("1", Contacto.stringToPhone("1"));
+        agenda.Anadir("2", Contacto.stringToPhone("2"));
+        agenda.Anadir("3", Contacto.stringToPhone("3"));
         List<Contacto> contactos = agenda.fromCSV(Agenda.DEFAULT_PATH);
         Assert.assertEquals(contactos.size(), agenda.getLista_contactos().size());
         compareContactList(agenda, contactos);
@@ -36,10 +36,10 @@ public class AgendaTest {
     @Test
     public void testPersistenciaSinNombre() {
         Agenda agenda = new Agenda();
-        agenda.Anadir(null, 1);
+        agenda.Anadir(null, Contacto.stringToPhone("1"));
         List<Phonenumber.PhoneNumber> tlfs = new ArrayList<com.google.i18n.phonenumbers.Phonenumber.PhoneNumber>();
-        tlfs.add(2);
-        tlfs.add(3);
+        tlfs.add(Contacto.stringToPhone("2"));
+        tlfs.add(Contacto.stringToPhone("3"));
         agenda.Anadir(null, tlfs);
         List<Contacto> contactos = agenda.fromCSV(Agenda.DEFAULT_PATH);
         Assert.assertEquals(contactos.size(), agenda.getLista_contactos().size());
@@ -54,9 +54,9 @@ public class AgendaTest {
     @Test
     public void testModificar() {
         Agenda agenda = new Agenda();
-        agenda.Anadir("1", 1);
-        agenda.Anadir("2", 2);
-        agenda.Anadir("3", 3);
+        agenda.Anadir("1", Contacto.stringToPhone("1"));
+        agenda.Anadir("2", Contacto.stringToPhone("2"));
+        agenda.Anadir("3", Contacto.stringToPhone("3"));
         Contacto contacto = agenda.getLista_contactos().get(1);
         agenda.Modificar(contacto, "dos", new ArrayList<com.google.i18n.phonenumbers.Phonenumber.PhoneNumber>());
         Assert.assertEquals(contacto.getNombre(), "dos");
@@ -66,9 +66,9 @@ public class AgendaTest {
     @Test
     public void testEliminar() {
         Agenda agenda = new Agenda();
-        agenda.Anadir("A", 1);
-        agenda.Anadir("B", 2);
-        agenda.Anadir("C", 3);
+        agenda.Anadir("A", Contacto.stringToPhone("1"));
+        agenda.Anadir("B", Contacto.stringToPhone("2"));
+        agenda.Anadir("C", Contacto.stringToPhone("3"));
         List<Contacto> listAux = new ArrayList<Contacto>();
         listAux.addAll(agenda.getLista_contactos());
         listAux.remove(2);
@@ -83,10 +83,10 @@ public class AgendaTest {
     @Test
     public void testAñadir() {
         Agenda agenda = new Agenda();
-        agenda.Anadir("A", 1);
-        agenda.Anadir("C", 2);
-        agenda.Anadir("D", 3);
-        agenda.Anadir("B", 4);
+        agenda.Anadir("A", Contacto.stringToPhone("1"));
+        agenda.Anadir("C", Contacto.stringToPhone("2"));
+        agenda.Anadir("D", Contacto.stringToPhone("3"));
+        agenda.Anadir("B", Contacto.stringToPhone("4"));
         Assert.assertEquals(agenda.getContacto(1).getNombre(), "B");
     }
 }

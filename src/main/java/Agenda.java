@@ -47,7 +47,7 @@ public class Agenda {
                     contacto = new Contacto(nombre);
                 }
                 while (st.hasMoreTokens()) {
-                    contacto.addTelefono(st.nextToken());
+                    contacto.addTelefono(Contacto.stringToPhone(st.nextToken()));
                 }
                 contactos.add(contacto);
             }

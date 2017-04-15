@@ -37,6 +37,21 @@ public class Contacto implements Comparable<Contacto> {
         this.telefonos.add(tlf);
     }
 
+    public static Phonenumber.PhoneNumber stringToPhone(String tlf) {
+        Phonenumber.PhoneNumber phoneNumber = null;
+        try {
+            phoneNumber = phoneUtil.parse(tlf, "ES");
+            if (!phoneUtil.isValidNumber(phoneNumber)) {
+                return null;
+            } else {
+                return phoneNumber;
+            }
+        } catch (NumberParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
 
     public String getNombre() {
         return nombre;
@@ -54,19 +69,8 @@ public class Contacto implements Comparable<Contacto> {
         this.telefonos = telefonos;
     }
 
-    public boolean addTelefono(String telf) {
-        try {
-            Phonenumber.PhoneNumber phoneNumber = phoneUtil.parse(telf, "ES");
-            if (!phoneUtil.isValidNumber(phoneNumber)) {
-                return false;
-            } else {
-                telefonos.add(phoneNumber);
-                return true;
-            }
-        } catch (NumberParseException e) {
-            e.printStackTrace();
-            return false;
-        }
+    public void addTelefono(Phonenumber.PhoneNumber tlf) {
+        telefonos.add(tlf);
     }
 
     public int compareTo(Contacto contacto) {
@@ -88,6 +92,5 @@ public class Contacto implements Comparable<Contacto> {
         }
         return nombre.equals(contacto.nombre);
     }
-
 }
 
