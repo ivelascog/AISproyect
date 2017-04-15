@@ -81,9 +81,9 @@ public class Agenda {
                 bw.append(contacto.getNombre()).append(",");
                 for (int i = 0; i < contacto.getTelefonos().size(); i++) {
                     if (i == (contacto.getTelefonos().size() - 1)) {
-                        bw.append(String.valueOf(contacto.getTelefonos().get(i))).append("\n");
+                        bw.append(Contacto.phoneUtil.format(contacto.getTelefonos().get(i), PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL)).append("\n");
                     } else {
-                        bw.append(String.valueOf(contacto.getTelefonos().get(i))).append(",");
+                        bw.append(Contacto.phoneUtil.format(contacto.getTelefonos().get(i), PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL)).append(",");
                     }
                 }
             }
