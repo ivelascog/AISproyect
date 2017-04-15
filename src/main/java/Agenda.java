@@ -69,7 +69,7 @@ public class Agenda {
         return contactos;
     }
 
-    public void toCSV(String path){
+    public void toCSV(String path) {
         File file = new File(path);
         FileWriter fr = null;
         BufferedWriter bw = null;
@@ -77,7 +77,7 @@ public class Agenda {
             fr = new FileWriter(file);
             bw = new BufferedWriter(fr);
             bw.append("Nombre,Tlfnos\n");
-            for (Contacto contacto:this.lista_contactos){
+            for (Contacto contacto : this.lista_contactos) {
                 bw.append(contacto.getNombre()).append(",");
                 for (int i = 0; i < contacto.getTelefonos().size(); i++) {
                     if (i == (contacto.getTelefonos().size() - 1)) {
@@ -98,7 +98,7 @@ public class Agenda {
                 if (fr != null) {
                     fr.close();
                 }
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -171,6 +171,13 @@ public class Agenda {
     public void Eliminar(Contacto contacto) {
         lista_contactos.remove(contacto);
         toCSV(DEFAULT_PATH);
+    }
+
+    public void cargar(){
+        File file = new File("Contactos.txt");
+        if (file.exists()){
+            this.setLista_contactos(fromCSV(DEFAULT_PATH));
+        }
     }
 }
 
