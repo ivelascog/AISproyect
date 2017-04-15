@@ -1,3 +1,5 @@
+import com.google.i18n.phonenumbers.Phonenumber;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,7 +12,6 @@ import java.util.StringTokenizer;
 public class Agenda {
     public static final String DEFAULT_PATH = "Contactos.txt";
     private List<Contacto> lista_contactos = new ArrayList<Contacto>();
-
 
 
     public List<Contacto> getLista_contactos() {
@@ -102,13 +103,13 @@ public class Agenda {
         }
     }
 
-    public void Anadir(String nombre, int telefono) {
+    public void Anadir(String nombre, Phonenumber.PhoneNumber telefono) {
         this.lista_contactos.add(new Contacto(nombre, telefono));
         Ordenar();
         toCSV(DEFAULT_PATH);
     }
 
-    public void Anadir(String nombre, List<Integer> telefono) {
+    public void Anadir(String nombre, List<Phonenumber.PhoneNumber> telefono) {
         this.lista_contactos.add(new Contacto(nombre, telefono));
         Ordenar();
         toCSV(DEFAULT_PATH);
@@ -157,7 +158,7 @@ public class Agenda {
         Collections.sort(lista_contactos);
     }
 
-    public void Modificar(Contacto contacto, String nombre, List<Integer> telefonos) {
+    public void Modificar(Contacto contacto, String nombre, List<Phonenumber.PhoneNumber> telefonos) {
         int index = lista_contactos.indexOf(contacto);
         Contacto contactoAux = lista_contactos.get(index);
         contacto.setNombre(nombre);

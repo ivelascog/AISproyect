@@ -1,3 +1,7 @@
+import com.google.i18n.phonenumbers.NumberParseException;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.google.i18n.phonenumbers.Phonenumber;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,9 +10,9 @@ import java.util.List;
  */
 public class Contacto implements Comparable<Contacto> {
     private String nombre;
-    private List<Integer> telefonos = new ArrayList<Integer>();
+    private List<Phonenumber.PhoneNumber> telefonos = new ArrayList<Phonenumber.PhoneNumber>();
 
-    public Contacto(String nombre, List<Integer> telefonos) {
+    public Contacto(String nombre, List<Phonenumber.PhoneNumber> telefonos) {
         this.nombre = nombre;
         this.telefonos = telefonos;
 
@@ -20,16 +24,27 @@ public class Contacto implements Comparable<Contacto> {
 
     public Contacto() {
         this.nombre = null;
-        this.telefonos = new ArrayList<Integer>();
+        this.telefonos = new ArrayList<Phonenumber.PhoneNumber>();
     }
 
-    public Contacto(String nombre, int telefono) {
+    public Contacto(String nombre, Phonenumber.PhoneNumber telefono) {
         this.nombre = nombre;
         this.telefonos.add(telefono);
     }
 
-    public Contacto(int tlf) {
+    public Contacto(Phonenumber.PhoneNumber tlf) {
         this.telefonos.add(tlf);
+    }
+
+    public static boolean checkNumber(String tlf) {
+        PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
+        try {
+            Phonenumber.PhoneNumber phoneNumber = phoneUtil.parse(tlf, "ES");
+            return phoneUtil.isValidNumber(phoneNumber);
+        } catch (NumberParseException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public String getNombre() {
@@ -40,15 +55,15 @@ public class Contacto implements Comparable<Contacto> {
         this.nombre = nombre;
     }
 
-    public List<Integer> getTelefonos() {
+    public List<Phonenumber.PhoneNumber> getTelefonos() {
         return telefonos;
     }
 
-    public void setTelefonos(List<Integer> telefonos) {
+    public void setTelefonos(List<Phonenumber.PhoneNumber> telefonos) {
         this.telefonos = telefonos;
     }
 
-    public void addTelefono(int telf) {
+    public void addTelefono(Phonenumber.PhoneNumber telf) {
         telefonos.add(telf);
     }
 

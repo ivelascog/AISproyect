@@ -1,5 +1,6 @@
 
 
+import com.google.i18n.phonenumbers.Phonenumber;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -36,7 +37,7 @@ public class AgendaTest {
     public void testPersistenciaSinNombre() {
         Agenda agenda = new Agenda();
         agenda.Anadir(null, 1);
-        List<Integer> tlfs = new ArrayList<Integer>();
+        List<Phonenumber.PhoneNumber> tlfs = new ArrayList<com.google.i18n.phonenumbers.Phonenumber.PhoneNumber>();
         tlfs.add(2);
         tlfs.add(3);
         agenda.Anadir(null, tlfs);
@@ -57,7 +58,7 @@ public class AgendaTest {
         agenda.Anadir("2", 2);
         agenda.Anadir("3", 3);
         Contacto contacto = agenda.getLista_contactos().get(1);
-        agenda.Modificar(contacto, "dos", new ArrayList<Integer>());
+        agenda.Modificar(contacto, "dos", new ArrayList<com.google.i18n.phonenumbers.Phonenumber.PhoneNumber>());
         Assert.assertEquals(contacto.getNombre(), "dos");
         Assert.assertEquals(contacto.getTelefonos().size(), 0);
     }
