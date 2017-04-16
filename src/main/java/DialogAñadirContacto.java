@@ -2,13 +2,15 @@ import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DialogAñadirContacto extends JDialog {
-    List<Phonenumber.PhoneNumber> numbers = new ArrayList<>();
-    Agenda agenda;
+    private List<Phonenumber.PhoneNumber> numbers = new ArrayList<>();
+    private Agenda agenda;
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
@@ -16,6 +18,9 @@ public class DialogAñadirContacto extends JDialog {
     private JList listTelefonos;
     private JTextField textTelefono;
     private JButton añadirButton;
+    private JButton btnEliminar;
+
+    private int indexTlfSelected = -1;
 
     public DialogAñadirContacto(Agenda agenda) {
         this.agenda = agenda;
@@ -61,6 +66,23 @@ public class DialogAñadirContacto extends JDialog {
                     textTelefono.setText("");
                 } else {
                     JOptionPane.showMessageDialog(null, "El numero introducido no es correcto", "Error", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+        listTelefonos.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent listSelectionEvent) {
+                indexTlfSelected = listTelefonos.getSelectedIndex();
+            }
+        });
+        btnEliminar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (indexTlfSelected>=0){
+                    numbers.remove(indexTlfSelected);
+                    loadTlfs();
+                } else {
+                    JOptionPane.showMessageDialog(null,"Selecciona el telefono a eliminar","Aviso",JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });
