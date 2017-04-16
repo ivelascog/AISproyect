@@ -54,7 +54,7 @@ public class DialogAñadirContacto extends JDialog {
         añadirButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                Phonenumber.PhoneNumber phoneNumber = Contacto.stringToPhone(textTelefono.getText());
+                Phonenumber.PhoneNumber phoneNumber = Contacto.stringToPhone(textTelefono.getText().trim());
                 if (phoneNumber != null) {
                     numbers.add(phoneNumber);
                     loadTlfs();
@@ -75,9 +75,24 @@ public class DialogAñadirContacto extends JDialog {
     }
 
     private void onOK() {
-        agenda.Anadir(textNombre.getText(), numbers);
-        dispose();
+        String nombre = textNombre.getText().trim();
+        if (nombre.equals("")) {
+            if (numbers.size() != 0) {
+                agenda.Anadir(" ", numbers);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "No se permiten contacios sin nombre ni telefono", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            if (!agenda.checkNombre(nombre)){
+                agenda.Anadir(nombre,numbers);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "No se permiten contacios con nombre repetido", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
     }
+
 
     private void onCancel() {
         dispose();

@@ -88,12 +88,16 @@ public class Contacto implements Comparable<Contacto> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-
         Contacto contacto = (Contacto) o;
-        if (this.getNombre() == null) {
-            return contacto.getNombre() == null;
-        }
-        return nombre.equals(contacto.nombre);
+
+        if (nombre != null ? !nombre.equals(contacto.nombre) : contacto.nombre != null) return false;
+        return telefonos != null ? telefonos.equals(contacto.telefonos) : contacto.telefonos == null;
+    }
+
+
+    @Override
+    public int hashCode() {
+        return 0;
     }
 
     public String toString() {

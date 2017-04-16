@@ -41,11 +41,7 @@ public class Agenda {
                 StringTokenizer st = new StringTokenizer(line, ",");
                 String nombre = st.nextToken();
                 Contacto contacto;
-                if (nombre.equals("null")) {
-                    contacto = new Contacto();
-                } else {
-                    contacto = new Contacto(nombre);
-                }
+                contacto = new Contacto(nombre);
                 while (st.hasMoreTokens()) {
                     contacto.addTelefono(Contacto.stringToPhone(st.nextToken()));
                 }
@@ -126,8 +122,18 @@ public class Agenda {
     }
 
     public boolean checkNombre(String nombre) {
-        Contacto contactoAux = new Contacto(nombre);
-        return lista_contactos.contains(contactoAux);
+        if (nombre==null){
+            return false;
+        } else if (nombre.equals("") || nombre.equals(" ")){
+            return false;
+        } else {
+            for (Contacto contacto :lista_contactos){
+                if (contacto.getNombre().equals(nombre)){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public List<Contacto> BuscarNombre(String nombre) {
