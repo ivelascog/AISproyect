@@ -30,6 +30,8 @@ public class GUI {
     public GUI() {
         agenda.cargar();
         loadContactos();
+        btnDelContacto.setEnabled(false);
+        btnDelTlf.setEnabled(false);
 
         //Listener Lista Contactos
         listContactos.addListSelectionListener(new ListSelectionListener() {
@@ -38,6 +40,7 @@ public class GUI {
                 contactoSeleccionado = (Contacto) listContactos.getSelectedValue();
                 indexTelefono = -1;
                 loadTelefonos();
+                btnDelContacto.setEnabled(true);
             }
         });
 
@@ -46,6 +49,7 @@ public class GUI {
             @Override
             public void valueChanged(ListSelectionEvent listSelectionEvent) {
                 indexTelefono = listNumeros.getSelectedIndex();
+                btnDelTlf.setEnabled(true);
             }
         });
 
@@ -58,6 +62,7 @@ public class GUI {
                     if (result == JOptionPane.YES_OPTION) {
                         contactoSeleccionado.getTelefonos().remove(indexTelefono);
                         loadTelefonos();
+                        btnDelTlf.setEnabled(false);
                     }
                 } else {
                     JOptionPane.showMessageDialog(new JFrame(), "Seleccione el Telefono a eliminar", "Eliminacion", JOptionPane.INFORMATION_MESSAGE);
@@ -75,6 +80,8 @@ public class GUI {
                         agenda.Eliminar(contactoSeleccionado);
                         contactoSeleccionado = null;
                         loadContactos();
+                        btnDelTlf.setEnabled(false);
+                        btnDelContacto.setEnabled(false);
                     }
                 } else {
                     JOptionPane.showMessageDialog(new JFrame(), "Seleccione el Contacto a eliminar", "Eliminacion", JOptionPane.INFORMATION_MESSAGE);
@@ -103,6 +110,8 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 dialogAddContacto();
+                btnDelTlf.setEnabled(false);
+                btnDelContacto.setEnabled(false);
             }
         });
     }
