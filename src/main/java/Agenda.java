@@ -173,9 +173,9 @@ public class Agenda {
         toCSV(DEFAULT_PATH);
     }
 
-    public void cargar(){
+    public void cargar() {
         File file = new File("Contactos.txt");
-        if (file.exists()){
+        if (file.exists()) {
             this.setLista_contactos(fromCSV(DEFAULT_PATH));
         }
     }

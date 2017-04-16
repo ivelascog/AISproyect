@@ -7,7 +7,6 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
 import java.util.List;
 
 /**
@@ -25,60 +24,71 @@ public class GUI {
     private JPanel panel2;
 
     private Agenda agenda = new Agenda();
-    Contacto contactoSeleccionado = null;
-    int indexTelefono = -1;
+    private Contacto contactoSeleccionado = null;
+    private int indexTelefono = -1;
+
     public GUI() {
         agenda.cargar();
         loadContactos();
+
+        //Listener Lista Contactos
         listContactos.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent listSelectionEvent) {
                 contactoSeleccionado = (Contacto) listContactos.getSelectedValue();
-                indexTelefono=-1;
+                indexTelefono = -1;
                 loadTelefonos();
             }
         });
+
+        //Listener Lista de Telefonos
         listNumeros.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent listSelectionEvent) {
                 indexTelefono = listNumeros.getSelectedIndex();
             }
         });
+
+        //Listener eliiminar Telefono
         btnDelTlf.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if (indexTelefono>=0){
-                   int result = JOptionPane.showConfirmDialog(new JFrame(),"esta seguro de eliminar el contacto","Eliminacion",JOptionPane.YES_NO_OPTION);
-                   if (result == JOptionPane.YES_OPTION){
-                       contactoSeleccionado.getTelefonos().remove(indexTelefono);
-                       loadTelefonos();
-                   }
+                if (indexTelefono >= 0) {
+                    int result = JOptionPane.showConfirmDialog(new JFrame(), "esta seguro de eliminar el contacto", "Eliminacion", JOptionPane.YES_NO_OPTION);
+                    if (result == JOptionPane.YES_OPTION) {
+                        contactoSeleccionado.getTelefonos().remove(indexTelefono);
+                        loadTelefonos();
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(new JFrame(),"Seleccione el Telefono a eliminar","Eliminacion",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(new JFrame(), "Seleccione el Telefono a eliminar", "Eliminacion", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });
+
+        //Listener Eliminar Contacto
         btnDelContacto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if (contactoSeleccionado != null){
-                    int result = JOptionPane.showConfirmDialog(new JFrame(),"¿Esta seguro de eliminar el contacto?","Eliminacion",JOptionPane.YES_NO_OPTION);
-                    if (result == JOptionPane.YES_OPTION){
+                if (contactoSeleccionado != null) {
+                    int result = JOptionPane.showConfirmDialog(new JFrame(), "¿Esta seguro de eliminar el contacto?", "Eliminacion", JOptionPane.YES_NO_OPTION);
+                    if (result == JOptionPane.YES_OPTION) {
                         agenda.Eliminar(contactoSeleccionado);
-                        contactoSeleccionado=null;
+                        contactoSeleccionado = null;
                         loadContactos();
                     }
                 } else {
-                    JOptionPane.showMessageDialog(new JFrame(),"Seleccione el Contacto a eliminar","Eliminacion",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(new JFrame(), "Seleccione el Contacto a eliminar", "Eliminacion", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });
+
+        //Listener de cuadro de busqueda
         txtBusqueda.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 String texto = txtBusqueda.getText();
                 Phonenumber.PhoneNumber numnber;
-                if (texto!=null && !texto.equals("")) {
+                if (texto != null && !texto.equals("")) {
                     if ((numnber = Contacto.stringToPhone(texto)) != null) {
                         loadContactos(agenda.BuscarTlf(numnber));
                     } else {
@@ -87,24 +97,14 @@ public class GUI {
                 }
             }
         });
-    }
 
-    private void loadContactos(List<Contacto> contactos) {
-        DefaultListModel<Contacto> model = new DefaultListModel<>();
-        for (Contacto contacto:contactos){
-            model.addElement(contacto);
-        }
-        listContactos.setModel(model);
-    }
-
-    private void loadTelefonos() {
-        DefaultListModel<String> model = new DefaultListModel<>();
-        if (contactoSeleccionado!= null) {
-            for (Phonenumber.PhoneNumber numero : contactoSeleccionado.getTelefonos()) {
-                model.addElement(Contacto.phoneUtil.format(numero, PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL));
+        //Boton Añadir Contacto
+        btnAddContacto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                dialogAddContacto();
             }
-        }
-        listNumeros.setModel(model);
+        });
     }
 
     public static void main(String[] args) {
@@ -117,8 +117,33 @@ public class GUI {
         frame.setVisible(true);
     }
 
-    private void loadContactos(){
+    private void loadContactos(List<Contacto> contactos) {
+        DefaultListModel<Contacto> model = new DefaultListModel<>();
+        for (Contacto contacto : contactos) {
+            model.addElement(contacto);
+        }
+        listContactos.setModel(model);
+    }
+
+    private void loadTelefonos() {
+        DefaultListModel<String> model = new DefaultListModel<>();
+        if (contactoSeleccionado != null) {
+            for (Phonenumber.PhoneNumber numero : contactoSeleccionado.getTelefonos()) {
+                model.addElement(Contacto.phoneUtil.format(numero, PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL));
+            }
+        }
+        listNumeros.setModel(model);
+    }
+
+    private void loadContactos() {
         loadContactos(agenda.getLista_contactos());
 
+    }
+
+    private void dialogAddContacto() {
+        DialogAñadirContacto dialog = new DialogAñadirContacto(agenda);
+        dialog.pack();
+        dialog.setVisible(true);
+        loadContactos();
     }
 }

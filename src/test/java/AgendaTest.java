@@ -1,5 +1,3 @@
-
-
 import com.google.i18n.phonenumbers.Phonenumber;
 import org.junit.Assert;
 import org.junit.Test;
