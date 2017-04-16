@@ -95,5 +95,9 @@ public class Contacto implements Comparable<Contacto> {
         }
         return nombre.equals(contacto.nombre);
     }
+
+    public String toString(){
+        return this.getNombre();
+    }
 }
 

@@ -50,7 +50,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="11211" class="javax.swing.JButton" binding="añadirButton" default-binding="true">
+          <component id="11211" class="javax.swing.JButton" binding="btnAddContacto">
             <constraints>
               <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -58,7 +58,7 @@
               <text value="Añadir"/>
             </properties>
           </component>
-          <component id="7ecb1" class="javax.swing.JButton" binding="eliminarButton" default-binding="true">
+          <component id="7ecb1" class="javax.swing.JButton" binding="btnDelContacto">
             <constraints>
               <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -66,7 +66,7 @@
               <text value="Eliminar"/>
             </properties>
           </component>
-          <component id="98d2d" class="javax.swing.JButton" binding="eliminarButton1" default-binding="true">
+          <component id="98d2d" class="javax.swing.JButton" binding="btnDelTlf">
             <constraints>
               <grid row="3" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -74,7 +74,7 @@
               <text value="Eliminar"/>
             </properties>
           </component>
-          <component id="8332f" class="javax.swing.JButton" binding="añadirButton1" default-binding="true">
+          <component id="8332f" class="javax.swing.JButton" binding="btnAddTlf">
             <constraints>
               <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
