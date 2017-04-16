@@ -22,6 +22,7 @@ public class GUI {
     private JButton btnAddTlf;
     private JPanel panel;
     private JPanel panel2;
+    private JButton btnModificar;
 
     private Agenda agenda = new Agenda();
     private Contacto contactoSeleccionado = null;
@@ -32,6 +33,7 @@ public class GUI {
         loadContactos();
         btnDelContacto.setEnabled(false);
         btnDelTlf.setEnabled(false);
+        btnModificar.setEnabled(false);
 
         //Listener Lista Contactos
         listContactos.addListSelectionListener(new ListSelectionListener() {
@@ -41,6 +43,7 @@ public class GUI {
                 indexTelefono = -1;
                 loadTelefonos();
                 btnDelContacto.setEnabled(true);
+                btnModificar.setEnabled(true);
             }
         });
 
@@ -82,6 +85,7 @@ public class GUI {
                         loadContactos();
                         btnDelTlf.setEnabled(false);
                         btnDelContacto.setEnabled(false);
+                        btnModificar.setEnabled(false);
                     }
                 } else {
                     JOptionPane.showMessageDialog(new JFrame(), "Seleccione el Contacto a eliminar", "Eliminacion", JOptionPane.INFORMATION_MESSAGE);
@@ -112,8 +116,26 @@ public class GUI {
                 dialogAddContacto();
                 btnDelTlf.setEnabled(false);
                 btnDelContacto.setEnabled(false);
+                btnModificar.setEnabled(false);
             }
         });
+        btnModificar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                dialogModificar();
+                btnDelTlf.setEnabled(false);
+                btnDelContacto.setEnabled(false);
+                btnModificar.setEnabled(false);
+            }
+        });
+    }
+
+    private void dialogModificar() {
+        DialogModificar dialog = new DialogModificar(agenda,contactoSeleccionado);
+        dialog.pack();
+        dialog.setVisible(true);
+        loadContactos();
+        loadTelefonos();
     }
 
     public static void main(String[] args) {
@@ -154,5 +176,6 @@ public class GUI {
         dialog.pack();
         dialog.setVisible(true);
         loadContactos();
+        loadTelefonos();
     }
 }
