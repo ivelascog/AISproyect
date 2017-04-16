@@ -140,7 +140,7 @@ public class Agenda {
         return filteredContactos;
     }
 
-    public List<Contacto> BuscarTlf(String tlf) {
+    public List<Contacto> BuscarTlf(Phonenumber.PhoneNumber tlf) {
         List<Contacto> filteredContactos = new ArrayList<Contacto>();
         for (Contacto contacto : lista_contactos) {
             boolean añadido = false;

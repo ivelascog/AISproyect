@@ -7,13 +7,15 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.*;
+import java.util.List;
 
 /**
  * Created by ivan_ on 15/04/2017.
  */
 public class GUI {
     private JList listContactos;
-    private JTextField textField1;
+    private JTextField txtBusqueda;
     private JList listNumeros;
     private JButton btnAddContacto;
     private JButton btnDelContacto;
@@ -56,12 +58,51 @@ public class GUI {
                 }
             }
         });
+        btnDelContacto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (contactoSeleccionado != null){
+                    int result = JOptionPane.showConfirmDialog(new JFrame(),"¿Esta seguro de eliminar el contacto?","Eliminacion",JOptionPane.YES_NO_OPTION);
+                    if (result == JOptionPane.YES_OPTION){
+                        agenda.Eliminar(contactoSeleccionado);
+                        contactoSeleccionado=null;
+                        loadContactos();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(new JFrame(),"Seleccione el Contacto a eliminar","Eliminacion",JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        });
+        txtBusqueda.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                String texto = txtBusqueda.getText();
+                Phonenumber.PhoneNumber numnber;
+                if (texto!=null && !texto.equals("")) {
+                    if ((numnber = Contacto.stringToPhone(texto)) != null) {
+                        loadContactos(agenda.BuscarTlf(numnber));
+                    } else {
+                        loadContactos(agenda.BuscarNombre(texto));
+                    }
+                }
+            }
+        });
+    }
+
+    private void loadContactos(List<Contacto> contactos) {
+        DefaultListModel<Contacto> model = new DefaultListModel<>();
+        for (Contacto contacto:contactos){
+            model.addElement(contacto);
+        }
+        listContactos.setModel(model);
     }
 
     private void loadTelefonos() {
         DefaultListModel<String> model = new DefaultListModel<>();
-        for (Phonenumber.PhoneNumber numero:contactoSeleccionado.getTelefonos()){
-            model.addElement(Contacto.phoneUtil.format(numero, PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL));
+        if (contactoSeleccionado!= null) {
+            for (Phonenumber.PhoneNumber numero : contactoSeleccionado.getTelefonos()) {
+                model.addElement(Contacto.phoneUtil.format(numero, PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL));
+            }
         }
         listNumeros.setModel(model);
     }
@@ -72,16 +113,12 @@ public class GUI {
         frame.setPreferredSize(new Dimension(500, 500));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setTitle("Gestor de Elecciones, Tenrero,Velasco,Loachamín");
+        frame.setTitle("Agenda Telefonica");
         frame.setVisible(true);
     }
 
     private void loadContactos(){
-        DefaultListModel<Contacto> model = new DefaultListModel<>();
-        for (Contacto contacto:agenda.getLista_contactos()){
-            model.addElement(contacto);
-        }
-        listContactos.setModel(model);
+        loadContactos(agenda.getLista_contactos());
 
     }
 }

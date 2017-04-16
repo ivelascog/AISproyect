@@ -29,6 +29,7 @@
             </constraints>
             <properties>
               <model/>
+              <selectionBackground color="-3321248"/>
             </properties>
           </component>
           <component id="92e48" class="javax.swing.JLabel">
@@ -37,11 +38,11 @@
             </constraints>
             <properties>
               <autoscrolls value="true"/>
-              <foreground color="-16777216"/>
+              <foreground color="-3473385"/>
               <text value="Contactos"/>
             </properties>
           </component>
-          <component id="dacdf" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+          <component id="dacdf" class="javax.swing.JTextField" binding="txtBusqueda">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -55,7 +56,9 @@
                 <preferred-size width="150" height="50"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <selectionBackground color="-3310716"/>
+            </properties>
           </component>
           <component id="11211" class="javax.swing.JButton" binding="btnAddContacto">
             <constraints>
