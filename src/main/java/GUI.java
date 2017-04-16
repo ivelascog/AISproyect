@@ -19,10 +19,11 @@ public class GUI {
     private JButton btnAddContacto;
     private JButton btnDelContacto;
     private JButton btnDelTlf;
-    private JButton btnAddTlf;
     private JPanel panel;
     private JPanel panel2;
     private JButton btnModificar;
+    private JButton btnExportar;
+    private JButton btnImportar;
 
     private Agenda agenda = new Agenda();
     private Contacto contactoSeleccionado = null;
@@ -128,6 +129,36 @@ public class GUI {
                 btnModificar.setEnabled(false);
             }
         });
+        btnExportar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                JFileChooser jFileChooser = new JFileChooser();
+                int result = jFileChooser.showOpenDialog(new JFrame());
+                if (result ==JFileChooser.APPROVE_OPTION){
+                    try {
+                        agenda.exportar(jFileChooser.getSelectedFile().getAbsolutePath());
+                        JOptionPane.showMessageDialog(null,"Se ha exportado con exito","Exporaticon",JOptionPane.INFORMATION_MESSAGE);
+                    } catch (Exception e){
+                        JOptionPane.showMessageDialog(null,"No se pudo llevar a cabo la exportacion por:"+ e.getLocalizedMessage(),"Error de Exportacion",JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
+        btnImportar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                JFileChooser jFileChooser = new JFileChooser();
+                int result = jFileChooser.showOpenDialog(new JFrame());
+                if (result ==JFileChooser.APPROVE_OPTION){
+                    try {
+                        agenda.impotar(jFileChooser.getSelectedFile().getAbsolutePath());
+                        JOptionPane.showMessageDialog(null,"Se ha importado con exito","Importacion",JOptionPane.INFORMATION_MESSAGE);
+                    } catch (Exception e){
+                        JOptionPane.showMessageDialog(null,"No se pudo llevar a cabo la Importacion devido a: "+ e.getLocalizedMessage(),"Error de Importacion",JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
     }
 
     private void dialogModificar() {
@@ -141,7 +172,7 @@ public class GUI {
     public static void main(String[] args) {
         JFrame frame = new JFrame("GUI");
         frame.setContentPane(new GUI().panel);
-        frame.setPreferredSize(new Dimension(500, 500));
+        frame.setPreferredSize(new Dimension(600, 500));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setTitle("Agenda Telefonica");

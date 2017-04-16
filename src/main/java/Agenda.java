@@ -75,11 +75,15 @@ public class Agenda {
             bw.append("Nombre,Tlfnos\n");
             for (Contacto contacto : this.lista_contactos) {
                 bw.append(contacto.getNombre()).append(",");
-                for (int i = 0; i < contacto.getTelefonos().size(); i++) {
-                    if (i == (contacto.getTelefonos().size() - 1)) {
-                        bw.append(Contacto.phoneUtil.format(contacto.getTelefonos().get(i), PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL)).append("\n");
-                    } else {
-                        bw.append(Contacto.phoneUtil.format(contacto.getTelefonos().get(i), PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL)).append(",");
+                if (contacto.getTelefonos().size()==0){
+                    bw.append("\n");
+                } else {
+                    for (int i = 0; i < contacto.getTelefonos().size(); i++) {
+                        if (i == (contacto.getTelefonos().size() - 1)) {
+                            bw.append(Contacto.phoneUtil.format(contacto.getTelefonos().get(i), PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL)).append("\n");
+                        } else {
+                            bw.append(Contacto.phoneUtil.format(contacto.getTelefonos().get(i), PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL)).append(",");
+                        }
                     }
                 }
             }
@@ -184,6 +188,8 @@ public class Agenda {
         if (file.exists()) {
             this.setLista_contactos(fromCSV(DEFAULT_PATH));
         }
+        Ordenar();
     }
+
 }
 

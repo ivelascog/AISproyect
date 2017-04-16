@@ -34,11 +34,11 @@ public class AgendaTest {
     @Test
     public void testPersistenciaSinNombre() {
         Agenda agenda = new Agenda();
-        agenda.Anadir(null, Contacto.stringToPhone("645383793"));
+        agenda.Anadir(" ", Contacto.stringToPhone("645383793"));
         List<Phonenumber.PhoneNumber> tlfs = new ArrayList<com.google.i18n.phonenumbers.Phonenumber.PhoneNumber>();
         tlfs.add(Contacto.stringToPhone("645389564"));
         tlfs.add(Contacto.stringToPhone("645289348"));
-        agenda.Anadir(null, tlfs);
+        agenda.Anadir(" ", tlfs);
         List<Contacto> contactos = agenda.fromCSV(Agenda.DEFAULT_PATH);
         Assert.assertEquals(contactos.size(), agenda.getLista_contactos().size());
         compareContactList(agenda, contactos);
@@ -46,7 +46,13 @@ public class AgendaTest {
 
     @Test
     public void testPersistenciaSinNumero() {
-        //TODO Cuando este listo la representacion de los numeros de los contactos
+        Agenda agenda = new Agenda();
+        agenda.Anadir(" ", Contacto.stringToPhone("645383793"));
+        agenda.Anadir("nombre",new ArrayList<>());
+        agenda.Anadir("prueba",Contacto.stringToPhone("645383793"));
+        List<Contacto> contactos = agenda.fromCSV(Agenda.DEFAULT_PATH);
+        Assert.assertEquals(contactos.size(), agenda.getLista_contactos().size());
+        compareContactList(agenda, contactos);
     }
 
     @Test

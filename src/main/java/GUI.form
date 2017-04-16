@@ -11,7 +11,7 @@
     </properties>
     <border type="none" title=""/>
     <children>
-      <grid id="1c5d1" binding="panel2" layout-manager="GridLayoutManager" row-count="5" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="1c5d1" binding="panel2" layout-manager="GridLayoutManager" row-count="5" column-count="7" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="10" left="10" bottom="10" right="10"/>
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -57,26 +57,9 @@
               <text value="Eliminar"/>
             </properties>
           </component>
-          <component id="98d2d" class="javax.swing.JButton" binding="btnDelTlf">
-            <constraints>
-              <grid row="3" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="Eliminar"/>
-            </properties>
-          </component>
-          <component id="8332f" class="javax.swing.JButton" binding="btnAddTlf">
-            <constraints>
-              <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="Añadir"/>
-              <visible value="true"/>
-            </properties>
-          </component>
           <component id="fc079" class="javax.swing.JLabel">
             <constraints>
-              <grid row="1" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="1" column="3" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <background color="-3473385"/>
@@ -93,20 +76,24 @@
             <children>
               <component id="7845b" class="javax.swing.JList" binding="listContactos">
                 <constraints/>
-                <properties/>
+                <properties>
+                  <selectionBackground color="-3321248"/>
+                </properties>
               </component>
             </children>
           </scrollpane>
           <scrollpane id="5aeda">
             <constraints>
-              <grid row="2" column="3" row-span="1" col-span="2" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="2" column="3" row-span="1" col-span="4" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
             <border type="none"/>
             <children>
               <component id="5ef42" class="javax.swing.JList" binding="listNumeros">
                 <constraints/>
-                <properties/>
+                <properties>
+                  <selectionBackground color="-3310716"/>
+                </properties>
               </component>
             </children>
           </scrollpane>
@@ -116,6 +103,30 @@
             </constraints>
             <properties>
               <text value="Modificar"/>
+            </properties>
+          </component>
+          <component id="38abe" class="javax.swing.JButton" binding="btnExportar">
+            <constraints>
+              <grid row="4" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Exportar"/>
+            </properties>
+          </component>
+          <component id="98d2d" class="javax.swing.JButton" binding="btnDelTlf">
+            <constraints>
+              <grid row="3" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Eliminar"/>
+            </properties>
+          </component>
+          <component id="2f544" class="javax.swing.JButton" binding="btnImportar">
+            <constraints>
+              <grid row="4" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Importar"/>
             </properties>
           </component>
         </children>
