@@ -18,9 +18,9 @@ public class DialogModificar extends JDialog {
     private JList listTelefonos;
 
 
-    List<Phonenumber.PhoneNumber> numbers;
-    Contacto contacto;
-    Agenda agenda;
+    private List<Phonenumber.PhoneNumber> numbers;
+    private Contacto contacto;
+    private Agenda agenda;
     private int indexTlfSelected=-1;
 
     public DialogModificar(Agenda agenda,Contacto contacto) {
@@ -70,7 +70,7 @@ public class DialogModificar extends JDialog {
                     loadTlfs();
                     textTlf.setText("");
                 } else {
-                    JOptionPane.showMessageDialog(null, "El numero introducido no es correcto", "Error", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "El número introducido no es correcto", "Error", JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
@@ -87,7 +87,7 @@ public class DialogModificar extends JDialog {
                     numbers.remove(indexTlfSelected);
                     loadTlfs();
                 } else {
-                    JOptionPane.showMessageDialog(null,"Selecciona el telefono a eliminar","Aviso",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"Selecciona el teléfono a eliminar","Aviso",JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });
@@ -108,7 +108,7 @@ public class DialogModificar extends JDialog {
                 agenda.Modificar(contacto," ",numbers);
                 dispose();
             } else {
-                JOptionPane.showMessageDialog(null, "No se permiten contactos sin nombre ni telefono", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No se permiten contactos sin nombre ni teléfono", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
             if (!agenda.checkNombre(nombre)){

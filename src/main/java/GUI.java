@@ -62,7 +62,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 if (indexTelefono >= 0) {
-                    int result = JOptionPane.showConfirmDialog(new JFrame(), "esta seguro de eliminar el contacto", "Eliminacion", JOptionPane.YES_NO_OPTION);
+                    int result = JOptionPane.showConfirmDialog(new JFrame(), "¿ Está seguro de eliminar el contacto ?", "Eliminacion", JOptionPane.YES_NO_OPTION);
                     if (result == JOptionPane.YES_OPTION) {
                         contactoSeleccionado.getTelefonos().remove(indexTelefono);
                         loadTelefonos();
@@ -175,7 +175,7 @@ public class GUI {
         frame.setPreferredSize(new Dimension(600, 500));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setTitle("Agenda Telefonica");
+        frame.setTitle("Agenda Telefónica");
         frame.setVisible(true);
     }
 

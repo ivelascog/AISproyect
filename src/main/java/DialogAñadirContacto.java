@@ -65,7 +65,7 @@ public class DialogAñadirContacto extends JDialog {
                     loadTlfs();
                     textTelefono.setText("");
                 } else {
-                    JOptionPane.showMessageDialog(null, "El numero introducido no es correcto", "Error", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "El número introducido no es correcto", "Error", JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
@@ -82,7 +82,7 @@ public class DialogAñadirContacto extends JDialog {
                     numbers.remove(indexTlfSelected);
                     loadTlfs();
                 } else {
-                    JOptionPane.showMessageDialog(null,"Selecciona el telefono a eliminar","Aviso",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"Selecciona el teléfono a eliminar","Aviso",JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });
@@ -103,14 +103,14 @@ public class DialogAñadirContacto extends JDialog {
                 agenda.Anadir(" ", numbers);
                 dispose();
             } else {
-                JOptionPane.showMessageDialog(null, "No se permiten contacios sin nombre ni telefono", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No se permiten contactos sin nombre ni teléfono", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
             if (!agenda.checkNombre(nombre)){
                 agenda.Anadir(nombre,numbers);
                 dispose();
             } else {
-                JOptionPane.showMessageDialog(null, "No se permiten contacios con nombre repetido", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No se permiten contactos con nombre repetido", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }

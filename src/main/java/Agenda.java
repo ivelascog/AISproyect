@@ -7,9 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.StringTokenizer;
 
-/*
-* @author Oscar de la Cuesta Campillo. www.palentino.es
-*/
+
 public class Agenda {
     public static final String DEFAULT_PATH = "Contactos.txt";
     private List<Contacto> lista_contactos = new ArrayList<Contacto>();
