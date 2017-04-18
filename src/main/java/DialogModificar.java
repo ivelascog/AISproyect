@@ -113,6 +113,7 @@ public class DialogModificar extends JDialog {
         } else {
             if (contacto.getNombre().equals(nombre)) {
                 agenda.Modificar(contacto, nombre, numbers);
+                dispose();
             } else {
                 if (!agenda.checkNombre(nombre)) {
                     agenda.Modificar(contacto, nombre, numbers);
