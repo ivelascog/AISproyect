@@ -108,14 +108,14 @@ public class DialogModificar extends JDialog {
                 agenda.Modificar(contacto," ",numbers);
                 dispose();
             } else {
-                JOptionPane.showMessageDialog(null, "No se permiten contacios sin nombre ni telefono", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No se permiten contactos sin nombre ni telefono", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
             if (!agenda.checkNombre(nombre)){
                 agenda.Modificar(contacto,nombre,numbers);
                 dispose();
             } else {
-                JOptionPane.showMessageDialog(null, "No se permiten contacios con nombre repetido", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No se permiten contactos con nombre repetido", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }
