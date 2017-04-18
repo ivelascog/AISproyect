@@ -173,8 +173,9 @@ public class Agenda {
     public void Modificar(Contacto contacto, String nombre, List<Phonenumber.PhoneNumber> telefonos) {
         int index = lista_contactos.indexOf(contacto);
         Contacto contactoAux = lista_contactos.get(index);
-        contacto.setNombre(nombre);
-        contacto.setTelefonos(telefonos);
+        contactoAux.setNombre(nombre);
+        contactoAux.setTelefonos(telefonos);
+        Ordenar();
         toCSV(DEFAULT_PATH);
     }
 

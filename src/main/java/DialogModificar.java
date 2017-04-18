@@ -105,17 +105,14 @@ public class DialogModificar extends JDialog {
         String nombre = textNombre.getText().trim();
         if (nombre.equals("")) {
             if (numbers.size() != 0) {
-                contacto.setNombre(" ");
-                contacto.setTelefonos(numbers);
+                agenda.Modificar(contacto," ",numbers);
                 dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "No se permiten contacios sin nombre ni telefono", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
             if (!agenda.checkNombre(nombre)){
-                contacto.setNombre(nombre);
-                contacto.setTelefonos(numbers);
-                agenda.Ordenar();
+                agenda.Modificar(contacto,nombre,numbers);
                 dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "No se permiten contacios con nombre repetido", "Aviso", JOptionPane.INFORMATION_MESSAGE);

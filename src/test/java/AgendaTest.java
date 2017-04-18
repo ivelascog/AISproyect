@@ -62,7 +62,7 @@ public class AgendaTest {
         agenda.Anadir("2", Contacto.stringToPhone("645289348"));
         agenda.Anadir("3", Contacto.stringToPhone("645383793"));
         Contacto contacto = agenda.getLista_contactos().get(1);
-        agenda.Modificar(contacto, "dos", new ArrayList<com.google.i18n.phonenumbers.Phonenumber.PhoneNumber>());
+        agenda.Modificar(contacto, "dos", new ArrayList<>());
         Assert.assertEquals(contacto.getNombre(), "dos");
         Assert.assertEquals(contacto.getTelefonos().size(), 0);
     }
