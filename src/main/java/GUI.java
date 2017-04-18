@@ -62,14 +62,14 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 if (indexTelefono >= 0) {
-                    int result = JOptionPane.showConfirmDialog(new JFrame(), "¿ Está seguro de eliminar el contacto ?", "Eliminacion", JOptionPane.YES_NO_OPTION);
+                    int result = JOptionPane.showConfirmDialog(new JFrame(), "¿ Está seguro de eliminar el Teléfono ?", "Eliminación", JOptionPane.YES_NO_OPTION);
                     if (result == JOptionPane.YES_OPTION) {
                         contactoSeleccionado.getTelefonos().remove(indexTelefono);
                         loadTelefonos();
                         btnDelTlf.setEnabled(false);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(new JFrame(), "Seleccione el Telefono a eliminar", "Eliminacion", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(new JFrame(), "Seleccione el Teléfono a eliminar", "Eliminación", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });
@@ -79,7 +79,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 if (contactoSeleccionado != null) {
-                    int result = JOptionPane.showConfirmDialog(new JFrame(), "¿Esta seguro de eliminar el contacto?", "Eliminacion", JOptionPane.YES_NO_OPTION);
+                    int result = JOptionPane.showConfirmDialog(new JFrame(), "¿Está seguro de eliminar el contacto?", "Eliminación", JOptionPane.YES_NO_OPTION);
                     if (result == JOptionPane.YES_OPTION) {
                         agenda.Eliminar(contactoSeleccionado);
                         contactoSeleccionado = null;
@@ -89,7 +89,7 @@ public class GUI {
                         btnModificar.setEnabled(false);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(new JFrame(), "Seleccione el Contacto a eliminar", "Eliminacion", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(new JFrame(), "Seleccione el Contacto a eliminar", "Eliminación", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });
@@ -137,9 +137,9 @@ public class GUI {
                 if (result ==JFileChooser.APPROVE_OPTION){
                     try {
                         agenda.exportar(jFileChooser.getSelectedFile().getAbsolutePath());
-                        JOptionPane.showMessageDialog(null,"Se ha exportado con exito","Exporaticon",JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null,"Se ha exportado con éxito","Exporaticon",JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception e){
-                        JOptionPane.showMessageDialog(null,"No se pudo llevar a cabo la exportacion por:"+ e.getLocalizedMessage(),"Error de Exportacion",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null,"No se pudo llevar a cabo la exportación por:"+ e.getLocalizedMessage(),"Error de Exportación",JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
@@ -152,9 +152,9 @@ public class GUI {
                 if (result ==JFileChooser.APPROVE_OPTION){
                     try {
                         agenda.impotar(jFileChooser.getSelectedFile().getAbsolutePath());
-                        JOptionPane.showMessageDialog(null,"Se ha importado con exito","Importacion",JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null,"Se ha importado con éxito","Importacion",JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception e){
-                        JOptionPane.showMessageDialog(null,"No se pudo llevar a cabo la Importacion devido a: "+ e.getLocalizedMessage(),"Error de Importacion",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null,"No se pudo llevar a cabo la Importación devido a: "+ e.getLocalizedMessage(),"Error de Importación",JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }

@@ -64,7 +64,7 @@
             <properties>
               <background color="-3473385"/>
               <foreground color="-3473385"/>
-              <text value="Numeros"/>
+              <text value="Números"/>
             </properties>
           </component>
           <scrollpane id="8e4aa">
